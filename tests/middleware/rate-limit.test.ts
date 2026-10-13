@@ -27,4 +27,14 @@ describe('rate limit', () => {
       expect(res.status).toBe(200);
     }
   });
+
+  it('applies default 1000 limit to api routes', async () => {
+    const app = createApp();
+    const res = await app.request('/stores', {
+      method: 'POST',
+      headers: { 'x-forwarded-for': 'test-wiring' },
+    });
+    expect(res.status).toBe(501);
+    expect(res.headers.get('RateLimit-Limit')).toBe('1000');
+  });
 });
