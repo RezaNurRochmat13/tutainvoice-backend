@@ -24,4 +24,13 @@ describe('app', () => {
     const res = await app.request('/invoices');
     expect(res.status).not.toBe(404);
   });
+
+  it('sets CORS header for dev origin', async () => {
+    const res = await app.request('/health', {
+      headers: { Origin: 'http://localhost:5173' },
+    });
+    expect(res.headers.get('access-control-allow-origin')).toBe(
+      'http://localhost:5173',
+    );
+  });
 });
