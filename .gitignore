@@ -2,4 +2,6 @@ dist
 node_modules
 docs
 docs/superpowers
+docs/superpowers/specs
 .env
+.superpowers
